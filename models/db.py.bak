@@ -61,26 +61,26 @@ db.define_table('oid_nonces',
                 SQLField('salt', 'string', length=40, required=True)
                )
                              
-db.define_table('oid_users',
+db.define_table('auth_user',
                 SQLField('nickname', label='Username', unique=True,
-                         requires=[IS_NOT_EMPTY(), IS_NOT_IN_DB(db, 'oid_users.nickname', error_message='This name is already taken.'), 
+                         requires=[IS_NOT_EMPTY(), IS_NOT_IN_DB(db, 'auth_user.nickname', error_message='This name is already taken.'), 
                          IS_MATCH(r'^[a-z0-9]+$', error_message='Usernames have to be alphanumeric and lowercase')]),
                 SQLField('oid_name', readable=False, writable=False, unique=True),
                 SQLField('first_name', required=True, length=128, default='',  requires=IS_NOT_EMPTY()),
                 SQLField('last_name', required=True, length=128, default='', requires=IS_NOT_EMPTY()),
-                SQLField('email', length=128, default='', requires=[IS_EMAIL(), IS_NOT_IN_DB(db, 'oid_users.email')]),
+                SQLField('email', length=128, default='', requires=[IS_EMAIL(), IS_NOT_IN_DB(db, 'auth_user.email')]),
                 SQLField('password', 'password', default='', readable=False, requires=[CRYPT(), IS_NOT_EMPTY()]),
                 SQLField('registration_key', length=128, writable=False, readable=False, default=''),
                 SQLField('dob', 'date', label='Date of birth', required=False, default='', requires=None, comment='optional ex: 1975-09-20'),
-                SQLField('gender',requires=IS_IN_SET(['', 'M', 'F']), comment='optional'),
                 SQLField('postcode', comment='optional'),
+                SQLField('gender',requires=IS_IN_SET(['', 'M', 'F']), comment='optional'),
                 SQLField('country', default=DEFAULT_COUNTRY, requires=IS_IN_DB(db,'oid_country_codes.code','oid_country_codes.country')),
                 SQLField('language', default=DEFAULT_LANG, requires=IS_IN_DB(db,'oid_lang_codes.code','oid_lang_codes.language')),
                 SQLField('timezone', default=DEFAULT_TIMEZONE, requires=IS_IN_DB(db,'oid_timezones.timezone'))
                ) 
                
 db.define_table('oid_trust',
-                SQLField('auth_user', db.oid_users),
+                SQLField('auth_user', db.auth_user),
                 SQLField('trust_root', 'string', length=2047)
                )
                            
@@ -138,7 +138,7 @@ def assignOidname():
        to the db field oid_name. The oid_name is the name used in the openid
        and cannot, unlike the nickname, be changed later on."""
        
-    query = (db.oid_users.nickname == request.vars.nickname)
+    query = (db.auth_user.nickname == request.vars.nickname)
     db(query).update(oid_name=request.vars.nickname.lower())
 
 
@@ -151,7 +151,7 @@ from gluon.tools import Mail, Auth, Crud     # new in web2py 1.56
 #mail.settings.sender='you@gmail.com'         # your email
 #mail.settings.login='username:password'      # your credentials
 auth=Auth(globals(),db)                      # authentication/authorization
-auth.settings.table_user = db.oid_users
+auth.settings.table_user = db.auth_user
 auth.settings.register_onaccept = lambda _:assignOidname() 
 #auth.settings.mailer=mail                    # for user email verification
 auth.define_tables()                         # creates all needed tables

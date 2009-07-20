@@ -428,7 +428,7 @@ vertical-align:top
  /* Taken from web2py default css 
  Flash */
 .flash { margin: 0 auto; text-align: center; clear: both; border: 1px
-#6A8600; background-color: #ccc; color: black; cursor: pointer; 
+#6A8600; background-color: #ffc; color: black; cursor: pointer; 
 /* margin-top: 0.0em; margin-bottom: 1.0em; padding-top: 1.0em;
 padding-bottom: 1.0em; */  }
 div.error { background-color: white; color: red; padding: 2px}
@@ -436,3 +436,7 @@ div.error { background-color: white; color: red; padding: 2px}
 .warn { background-color: yellow; color: black; padding: 5px; }
 .info { background-color: #E5FFE5; color: black; padding: 5px; }
 .error { background-color: red; color: white; padding: 5px; }
+
+.user_form input, select {
+width:250px
+}

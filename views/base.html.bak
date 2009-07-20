@@ -56,7 +56,7 @@ Released   : 20090717
         {{if dialogView:}}
         {{pass}}
         {{except:}}
-        <div id="banner"><a href="#"><img src="{{=URL(r=request, c='static', f='nimbus/images/img05.jpg')}}" alt="" /></a></div>
+        <!-- div id="banner"><a href="#"><img src="{{=URL(r=request, c='static', f='nimbus/images/img05.jpg')}}" alt="" /></a></div -->
         {{pass}}
         {{if response.flash:}}
         <div class="flash">{{=response.flash}}</div>
@@ -78,11 +78,17 @@ Released   : 20090717
                     <li>
                          <h2>account</h2>
                          {{if auth.is_logged_in():}}
-                             Hello <strong>{{=auth.user.oid_name}}</strong>! You are logged in.
+                             Hello <strong>{{=auth.user.oid_name}}</strong>! You are logged in.<br />
+                             <img style="vertical-align:middle" src="{{=URL(r=request, c='static', f='openid-16x16.gif')}}">icy.co.za/{{=auth.user.oid_name}}
+                           
+                             {{import md5}}
+                             <center><br />
+                             <a target="_gravatar" href="http://www.gravatar.com/"><img style="margin-top:1em;border:1px solid black" src="http://www.gravatar.com/avatar/{{=md5.new(auth.user.email).hexdigest()}}.jpg" /></a>
+                             </center>
                              <p>
                              <ul>
                                <li><a href="{{=URL(r=request, c='auth', f='user', args='profile')}}">Your profile</a>
-                               <li><a href="{{=URL(r=request, c='auth', f='user', args='profile')}}">Change password</a>
+                               <li><a href="{{=URL(r=request, c='auth', f='user', args='change_password')}}">Change password</a>
                                <li><a href="{{=URL(r=request, c='auth', f='user', args='logout')}}">Logout</a>
                              </ul>
                              </p>
@@ -90,7 +96,7 @@ Released   : 20090717
                          {{else:}}
                              {{=auth.login()}}
                              <ul>
-                               <li><a href="{{=URL(r=request, c='auth', f='user', args='recover_password')}}">Lost password</a>
+                               <li><a href="{{=URL(r=request, c='auth', f='user', args='retrieve_password')}}">Lost password</a>
                                <li><a href="{{=URL(r=request, c='auth', f='user', args='register')}}">Register</a>
                              </ul>
                              </p>
@@ -98,7 +104,7 @@ Released   : 20090717
                     </li>
                     
 
-                    <!-- li>
+                    <li>
                         <h2>use your id</h2>
                         <p>Here are a number of sites that accept opendID.</p>
                         <ul>
@@ -115,7 +121,7 @@ Released   : 20090717
                             <li><a href="#">Cursus sed arcu sed<br />
                                 </a></li>
                         </ul>
-                    </li -->
+                    </li>
                 </ul>
             </div>
             <!-- end #sidebar -->

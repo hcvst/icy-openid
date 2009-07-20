@@ -3,12 +3,13 @@
 
 def user():
     views = {'login':dict(title='Please login', text='', dialogView=True),
-             'register':dict(title='Register an openID', text='Sing up for your free openID. The fields up to and including password are required.', dialogView=True),
+             'register':dict(title='Register an openID', text='Sing up for your free openID. The fields up to and including password are required.'),
              'profile':dict(title='Your openID profile', text='Update your profile using the form below. Please not that changing your nickname will not change your openid.'),
-             'change_password':dict(title='Change password', text='Please use the form below to change your password.')
+             'change_password':dict(title='Change password', text='Please use the form below to change your password.'),
+             'retrieve_password':dict(title='Retrieve password', text='Please enter your email address into the form below.')
             }
     view = views.get(request.args[0], dict(title='', text=''))
-    view['form'] = auth()
+    view['form'] = SPAN(auth(), _class='user_form')
     return view
 
 
@@ -24,7 +25,7 @@ def data():
         response.flash="Incorrect user!"
         return response.render('auth/data-idmismatch.html', dict(auth_user=auth_user, oid_user=oid_user, dialogView=True))
     else:
-        response.flash="Incorrect user!"
+
         body = "You are about to log in to %s as %s." % (orequest.trust_root, auth_user)
         sreg_req = SRegRequest.fromOpenIDRequest(orequest)
         if sreg_req.wereFieldsRequested():

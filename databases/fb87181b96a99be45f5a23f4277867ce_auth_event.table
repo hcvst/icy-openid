@@ -9,7 +9,7 @@ S'CHAR(32)'
 p5
 sS'user_id'
 p6
-S'REFERENCES oid_users(id) ON DELETE CASCADE'
+S'REFERENCES auth_user(id) ON DELETE CASCADE'
 p7
 sS'description'
 p8

@@ -5,7 +5,7 @@ S'REFERENCES auth_group(id) ON DELETE CASCADE'
 p3
 sS'user_id'
 p4
-S'REFERENCES oid_users(id) ON DELETE CASCADE'
+S'REFERENCES auth_user(id) ON DELETE CASCADE'
 p5
 sS'id'
 p6

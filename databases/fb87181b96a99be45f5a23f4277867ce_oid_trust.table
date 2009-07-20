@@ -1,7 +1,7 @@
 (dp1
 S'auth_user'
 p2
-S'REFERENCES oid_users(id) ON DELETE CASCADE'
+S'REFERENCES auth_user(id) ON DELETE CASCADE'
 p3
 sS'trust_root'
 p4

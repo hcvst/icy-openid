@@ -436,3 +436,11 @@ div.error { background-color: white; color: red; padding: 2px}
 .warn { background-color: yellow; color: black; padding: 5px; }
 .info { background-color: #E5FFE5; color: black; padding: 5px; }
 .error { background-color: red; color: white; padding: 5px; }
+
+.user_form input, select {
+width:250px
+}
+
+.user_form #submit_record__row input {
+width:100px
+}

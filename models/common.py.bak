@@ -1,0 +1,5 @@
+response.menu = [('home', URL(r=request, c='default', f='index')),
+                 ('profile', URL(r=request, c='acc')),
+                 ('developer', 'http://icy.co.za'),
+                 ('contact', 'http://icy.co.za')
+                ]

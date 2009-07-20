@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Nimbuslike
+Description: A two-column, fixed-width design for 1024x768 screen resolutions.
+Version    : 1.0
+Released   : 20090717
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="author" lang="en" content="{{=response.author}}" />
+<meta name="keywords" content="{{=response.keywords}}" />
+<meta name="description" content="{{=response.description}}" />
+<title>{{=response.title or URL(r=request)}}</title>
+{{include 'web2py_ajax.html'}}
+<link href="{{=URL(r=request, c='static', f='nimbus/style.css')}}" rel="stylesheet" type="text/css" media="screen" />
+
+</head>
+<body>
+<div id="wrapper">
+    <div id="header-wrapper">
+        <div id="header">
+            <div id="logo">
+                <h1><a href="#">ICY OpenID</a></h1>
+                <h2>by <a href="http://icy.co.za/">icy.co.za</a></h2>
+            </div>
+            <!-- div id="search">
+                <form method="get" action="">
+                    <fieldset>
+                    <input type="text" id="search-text" name="s" value="" />
+                    </fieldset>
+                </form>
+            </div -->
+            <!-- end #logo -->
+        </div>
+        <!-- end #header -->
+        <div id="menu">
+            <ul>
+            {{first=True}}
+            {{for _name, _link in response.menu:}}
+            <li{{if first:}} class="first"{{pass}}><a href="{{=_link}}">{{=_name}}</a></li>
+            {{first=False}}
+            {{pass}}
+            </ul>
+        </div>
+        <!-- end #menu -->
+    </div>
+    <!-- end #header-wrapper -->
+    <div id="page">
+        {{try:}}
+        {{if dialogView:}}
+        {{pass}}
+        {{except:}}
+        <div id="banner"><a href="#"><img src="{{=URL(r=request, c='static', f='nimbus/images/img05.jpg')}}" alt="" /></a></div>
+        {{pass}}
+        {{if response.flash:}}
+        <div class="flash">{{=response.flash}}</div>
+        {{pass}}
+        <div id="page-bgcontent">
+            <div id="content">
+            
+                {{include}}
+                
+            </div>
+            <!-- end #content -->
+            
+        {{try:}}
+        {{if dialogView:}}
+        {{pass}}
+        {{except:}}
+            <div id="sidebar">
+                <ul>
+                    <li>
+                         <h2>account</h2>
+                         {{if auth.is_logged_in():}}
+                             Hello <strong>{{=auth.user.oid_name}}</strong>! You are logged in.
+                             <p>
+                             <ul>
+                               <li><a href="{{=URL(r=request, c='auth', f='user', args='profile')}}">Your profile</a>
+                               <li><a href="{{=URL(r=request, c='auth', f='user', args='profile')}}">Change password</a>
+                               <li><a href="{{=URL(r=request, c='auth', f='user', args='logout')}}">Logout</a>
+                             </ul>
+                             </p>
+                            
+                         {{else:}}
+                             {{=auth.login()}}
+                             <ul>
+                               <li><a href="{{=URL(r=request, c='auth', f='user', args='recover_password')}}">Lost password</a>
+                               <li><a href="{{=URL(r=request, c='auth', f='user', args='register')}}">Register</a>
+                             </ul>
+                             </p>
+                         {{pass}}
+                    </li>
+                    
+
+                    <li>
+                        <h2>use your id</h2>
+                        <p>Here are a number of sites that accept opendID.</p>
+                        <ul>
+                            <li><a href="#">Sed accumsan congue</a></li>
+                            <li><a href="#"> Nulla dignissim nec augue</a></li>
+                            <li><a href="#">Nunc ante elit nulla</a></li>
+                            <li><a href="#">Sed suscipit consequat</a></li>
+                            <li><a href="#">Cursus sed arcu sed</a></li>
+                            <li><a href="#">Nulla dignissim nec augue</a></li>
+                            <li><a href="#">Sed accumsan congue</a></li>
+                            <li><a href="#">Dignissim lorem augue</a></li>
+                            <li><a href="#">Nunc ante elit nulla</a></li>
+                            <li><a href="#">Sed suscipit consequat</a></li>
+                            <li><a href="#">Cursus sed arcu sed<br />
+                                </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- end #sidebar -->
+        {{pass}}
+            <div style="clear: both;">&nbsp;</div>
+        </div>
+        <div id="footer">
+            <p>(c) 2009 icy.co.za Design by <a href="http://www.nodethirtythree.com/">nodethirtythree</a> + <a href="http://www.freecsstemplates.org">free css templates</a></p>
+        </div>
+        <!-- end #footer -->
+    </div>
+    <!-- end #page -->
+</div>
+</body>
+</html>

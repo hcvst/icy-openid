@@ -1,0 +1,14 @@
+(dp1
+S'auth_user'
+p2
+S'REFERENCES oid_users(id) ON DELETE CASCADE'
+p3
+sS'trust_root'
+p4
+S'CHAR(2047)'
+p5
+sS'id'
+p6
+S'INTEGER PRIMARY KEY AUTOINCREMENT'
+p7
+s.

@@ -1,0 +1,11 @@
+<html>
+<head>
+<title>{{=identity}}'s profile</title>
+<meta http-equiv="x-xrds-location" content="{{=xrds_location}}" />
+<link rel="openid.server" href="{{=oid_server}}" />
+<link rel="openid.delegate" href="{{=oid_delegate}}" />
+</head>
+<body>
+<h1>{{=identity}}'s profile</h1>
+</body>
+</html>

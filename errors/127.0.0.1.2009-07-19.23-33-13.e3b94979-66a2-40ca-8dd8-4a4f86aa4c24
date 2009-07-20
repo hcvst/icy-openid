@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'Processing View auth/user.html'
+p4
+sS'code'
+p5
+S'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n<meta http-equiv="content-type" content="text/html; charset=utf-8" />\n<meta name="author" lang="en" content="{{=response.author}}" />\n<meta name="keywords" content="{{=response.keywords}}" />\n<meta name="description" content="{{=response.description}}" />\n<title>{{=response.title or URL(r=request)}}</title>\n<link rel="stylesheet" media="screen,projection" type="text/css" href="{{=URL(r=request,c=\'static\',f=\'styles.css\')}}" />\n{{include \'web2py_ajax.html\'}}\n</head>\n<body>\n<div id="header">\n <div id="header_inner" class="fixed">\n   <div id="logo">\n     <h1><a href="http://www.web2py.com">[web2py<sup style="font-size:0.5em;">TM</sup>]</a></h1>\n     <h2>{{=request.application}}</h2>\n   </div>\n   {{if response.menu is not None:}}\n   <div id="menu">\n   <ul>\n    {{for _name, _link in response.menu:}}\n     <li><a href="{{=_link}}" onmouseover="this.ccc=this.style.backgroundColor;this.style.backgroundColor=\'white\';" onmouseout="this.style.backgroundColor=this.ccc;" {{if not _active:}}class="inactive"{{pass}}>{{=_name}}</a></li>\n     {{pass}}\n   </ul>\n   </div>\n   {{pass}}\n  </div>\n</div>\n<div id="main">\n  <div id="main_inner" class="fixed">\n    <div id="primaryContent_columnless">\n      <div id="columnA_columnless">\n        {{if response.flash:}}\n        <div class="flash">{{=response.flash}}</div>\n        {{pass}}\n        \n{{=form}}\n\n      </div>\n    </div>\n  </div>\n</div>\n<div id="footer" class="fixed">\n   Powered by <a href="http://www.web2py.com">web2py</a> (TM) created by Massimo Di Pierro &copy; 2007, 2008, 2009\n</div>\n</body>\n</html>\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/hcvst/dev/web2py/gluon/template.py", line 128, in parse_template\n    child = open(t, \'rb\').read()\nIOError: [Errno 2] No such file or directory: \'/home/hcvst/dev/web2py/applications/openid/views/web2py_ajax.html\'\n'
+p8
+s.

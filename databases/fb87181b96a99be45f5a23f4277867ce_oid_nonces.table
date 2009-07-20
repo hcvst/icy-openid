@@ -1,0 +1,18 @@
+(dp1
+S'timestamp'
+p2
+S'INTEGER'
+p3
+sS'salt'
+p4
+S'CHAR(40)'
+p5
+sS'id'
+p6
+S'INTEGER PRIMARY KEY AUTOINCREMENT'
+p7
+sS'server_url'
+p8
+S'CHAR(2047)'
+p9
+s.

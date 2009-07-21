@@ -79,7 +79,7 @@ Released   : 20090717
                          <h2>account</h2>
                          {{if auth.is_logged_in():}}
                              Hello <strong>{{=auth.user.oid_name}}</strong>! You are logged in.<br />
-                             <img style="vertical-align:middle" src="{{=URL(r=request, c='static', f='openid-16x16.gif')}}">icy.co.za/{{=auth.user.oid_name}}
+                             ID <img style="vertical-align:middle" src="{{=URL(r=request, c='static', f='openid-16x16.gif')}}"> http://icy.co.za/{{=auth.user.oid_name}}
                            
                              {{import md5}}
                              <center><br />
@@ -129,7 +129,10 @@ Released   : 20090717
             <div style="clear: both;">&nbsp;</div>
         </div>
         <div id="footer">
-            <p>(c) 2009 icy.co.za Design by <a href="http://www.nodethirtythree.com/">nodethirtythree</a> + <a href="http://www.freecsstemplates.org">free css templates</a></p>
+            <p>(c) 2009 icy.co.za
+            <!-- Do not remove the following footer details please. The license requires it. -->
+            <br />Powered by <a href="http://icy.co.za">icy openid</a> and <a href="http://web2py.com">web2py</a>. Design by <a href="http://www.nodethirtythree.com/">nodethirtythree</a> + <a href="http://www.freecsstemplates.org">free css templates</a>.
+            </p>
         </div>
         <!-- end #footer -->
     </div>

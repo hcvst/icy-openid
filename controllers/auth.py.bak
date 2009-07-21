@@ -5,8 +5,8 @@ def user():
     views = {'login':dict(title='Please login', text='', dialogView=True),
              'register':dict(title='Register an openID', text='Sing up for your free openID. The fields up to and including password are required.'),
              'profile':dict(title='Your openID profile', text='Update your profile using the form below. Please not that changing your nickname will not change your openid.'),
-             'change_password':dict(title='Change password', text='Please use the form below to change your password.'),
-             'retrieve_password':dict(title='Retrieve password', text='Please enter your email address into the form below.')
+             'change_password':dict(title='Change password', text='Please use the form below to change your password.', dialogView=True),
+             'retrieve_password':dict(title='Retrieve password', text='Please enter your email address into the form below.', dialogView=True)
             }
     view = views.get(request.args[0], dict(title='', text=''))
     view['form'] = SPAN(auth(), _class='user_form')
@@ -14,6 +14,23 @@ def user():
 
 
 def data():
+    form = FORM(INPUT(_type='submit', _name='allow_once', _value='Allow once'),
+                INPUT(_type='submit', _name='allow_always', _value='Allow always'),
+                INPUT(_type='submit', _name='cancel', _value='Cancel'),
+               )
+    print request.vars           
+    if 'allow_once' in request.vars:
+        session.oid_trust_root_once = session.oid_orequest.trust_root
+        return redirect(session.oid_url)
+    if 'allow_always' in request.vars:
+        query = (db.oid_trust.auth_user == auth.user.id) & (db.oid_trust.trust_root == session.oid_orequest.trust_root)
+        assert db(query).count() == 0
+        db.oid_trust.insert(auth_user = auth.user, trust_root = session.trust_root)   
+        return redirect(session.oid_url) 
+    if 'cancel' in request.vars:
+        session.oid_cancel = True
+        return redirect(session.oid_url)
+                  
     from openid.extensions.sreg import SRegRequest
     orequest = session.oid_orequest
     auth_user = auth.user.oid_name
@@ -25,25 +42,27 @@ def data():
         response.flash="Incorrect user!"
         return response.render('auth/data-idmismatch.html', dict(auth_user=auth_user, oid_user=oid_user, dialogView=True))
     else:
+        response.flash="Authentication request from %s" % orequest.trust_root
+        return response.render('auth/data-approve.html', dict(orequest=orequest, dialogView=True, form=form))
 
-        body = "You are about to log in to %s as %s." % (orequest.trust_root, auth_user)
-        sreg_req = SRegRequest.fromOpenIDRequest(orequest)
-        if sreg_req.wereFieldsRequested():
-            body += '<br />In addition the site has requested the following information.'
-            if sreg_req.required:
-                body += '<h2>Required information</h2>'
-                for r in sreg_req.required:
-                    body += r.capitalize()
-            if sreg_req.optional:
-                body += '<h2>Optional information</h2>'
-                for o in sreg_req.optional:
-                    body += o.capitalize()
-            if sreg_req.policy_url:
-                body += "The site's data usage policy can be found here: <a href='%(url)s'>%(url)s</a>" % {"url":sreg_req.policy_url}
-            else:
-                body += """This site did not include a link to their data usage policy. 
-                           This might be a bad thing. If you are the site-admin please
-                           consider adding one."""
+#        body = "You are about to log in to %s as %s." % (orequest.trust_root, auth_user)
+#        sreg_req = SRegRequest.fromOpenIDRequest(orequest)
+#        if sreg_req.wereFieldsRequested():
+#            body += '<br />In addition the site has requested the following information.'
+#            if sreg_req.required:
+#                body += '<h2>Required information</h2>'
+#                for r in sreg_req.required:
+#                    body += r.capitalize()
+#            if sreg_req.optional:
+#                body += '<h2>Optional information</h2>'
+#                for o in sreg_req.optional:
+#                    body += o.capitalize()
+#            if sreg_req.policy_url:
+#                body += "The site's data usage policy can be found here: <a href='%(url)s'>%(url)s</a>" % {"url":sreg_req.policy_url}
+#            else:
+#                body += """This site did not include a link to their data usage policy. 
+#                           This might be a bad thing. If you are the site-admin please
+#                           consider adding one."""
                     
         resp = dict(body=body)
     return resp

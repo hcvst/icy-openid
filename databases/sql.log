@@ -1,4 +1,4 @@
-timestamp: 2009-07-20T05:43:30.581191
+timestamp: 2009-07-21T19:07:56.311555
 CREATE TABLE oid_associations(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	server_url CHAR(2047),
@@ -9,7 +9,7 @@ CREATE TABLE oid_associations(
 	assoc_type CHAR(64)
 );
 success!
-timestamp: 2009-07-20T05:43:30.601578
+timestamp: 2009-07-21T19:07:56.320822
 CREATE TABLE oid_nonces(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	server_url CHAR(2047),
@@ -17,7 +17,7 @@ CREATE TABLE oid_nonces(
 	salt CHAR(40)
 );
 success!
-timestamp: 2009-07-20T05:43:30.616150
+timestamp: 2009-07-21T19:07:56.327131
 CREATE TABLE auth_user(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	nickname CHAR(32) UNIQUE,
@@ -35,28 +35,28 @@ CREATE TABLE auth_user(
 	timezone CHAR(32)
 );
 success!
-timestamp: 2009-07-20T05:43:30.628698
+timestamp: 2009-07-21T19:07:56.332609
 CREATE TABLE oid_trust(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	auth_user REFERENCES auth_user(id) ON DELETE CASCADE,
 	trust_root CHAR(2047)
 );
 success!
-timestamp: 2009-07-20T05:43:30.644240
+timestamp: 2009-07-21T19:07:56.336825
 CREATE TABLE oid_country_codes(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	code CHAR(2) UNIQUE,
 	country CHAR(32)
 );
 success!
-timestamp: 2009-07-20T05:43:30.655825
+timestamp: 2009-07-21T19:07:56.341604
 CREATE TABLE oid_lang_codes(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	code CHAR(2) UNIQUE,
 	language CHAR(32)
 );
 success!
-timestamp: 2009-07-20T05:43:30.664459
+timestamp: 2009-07-21T19:07:56.346130
 CREATE TABLE oid_timezones(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	timezone CHAR(32)
@@ -71,21 +71,21 @@ success!
 DELETE FROM oid_timezones;
 DELETE FROM sqlite_sequence WHERE name='oid_timezones';
 success!
-timestamp: 2009-07-20T05:43:30.883270
+timestamp: 2009-07-21T19:07:56.553974
 CREATE TABLE auth_group(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	role CHAR(128),
 	description TEXT
 );
 success!
-timestamp: 2009-07-20T05:43:30.900601
+timestamp: 2009-07-21T19:07:56.564475
 CREATE TABLE auth_membership(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	user_id REFERENCES auth_user(id) ON DELETE CASCADE,
 	group_id REFERENCES auth_group(id) ON DELETE CASCADE
 );
 success!
-timestamp: 2009-07-20T05:43:30.952660
+timestamp: 2009-07-21T19:07:56.569664
 CREATE TABLE auth_permission(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	group_id REFERENCES auth_group(id) ON DELETE CASCADE,
@@ -94,7 +94,7 @@ CREATE TABLE auth_permission(
 	record_id INTEGER
 );
 success!
-timestamp: 2009-07-20T05:43:30.964846
+timestamp: 2009-07-21T19:07:56.575025
 CREATE TABLE auth_event(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	time_stamp TIMESTAMP,
@@ -103,4 +103,22 @@ CREATE TABLE auth_event(
 	origin CHAR(32),
 	description TEXT
 );
+success!
+DELETE FROM oid_country_codes;
+DELETE FROM sqlite_sequence WHERE name='oid_country_codes';
+success!
+DELETE FROM oid_lang_codes;
+DELETE FROM sqlite_sequence WHERE name='oid_lang_codes';
+success!
+DELETE FROM oid_timezones;
+DELETE FROM sqlite_sequence WHERE name='oid_timezones';
+success!
+DELETE FROM oid_country_codes;
+DELETE FROM sqlite_sequence WHERE name='oid_country_codes';
+success!
+DELETE FROM oid_lang_codes;
+DELETE FROM sqlite_sequence WHERE name='oid_lang_codes';
+success!
+DELETE FROM oid_timezones;
+DELETE FROM sqlite_sequence WHERE name='oid_timezones';
 success!

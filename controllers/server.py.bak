@@ -1,6 +1,5 @@
-exec "from applications.%s.modules.openid.server.server import Server" % request.application 
+from openid.server.server import Server
 exec "from applications.%s.modules.web2pystore import Web2pyStore" % request.application
-from openid.extensions.sreg import SRegRequest
     
 def index():
     oidstore = Web2pyStore(db)

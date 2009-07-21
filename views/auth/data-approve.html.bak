@@ -1,0 +1,5 @@
+{{extend 'base.html'}}
+<h2>Authentication request</h2>
+<p>We have received a request for authentication from {{=orequest.trust_root}}.
+Please indicate whether you want to proceed.
+</p>

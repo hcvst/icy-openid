@@ -1,0 +1,7 @@
+databases/*
+sessions/*
+uploads/*
+errors/*
+cron/*
+cache/*
+

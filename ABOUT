@@ -1,2 +1,18 @@
-Write something about this app.
-Developed with web2py.
+Icy openid is a multi-user openID provider based on the Python web-framework web2py.
+
+Developer
+---------
+Hans Chrstian v. Stockhausen (aka HC)
+xri://=hc
+
+Homepage
+--------
+http://icy.co.za
+
+Repo
+----
+http://github.com/hcvst/icy-openid/tree/master
+
+Status
+------
+pre-alpha but the openID server works.

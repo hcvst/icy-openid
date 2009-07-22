@@ -41,10 +41,14 @@ if 'auth' in globals():
 ## add/remove items as required
 ##########################################
 
-response.menu = [
-    ['Index', False, 
-     URL(request.application,'default','index'), []],
-    ]
+   
+
+response.menu = [['home', False, URL(r=request, c='default', f='index')],
+                 ['profile', False, URL(r=request, c='acc')],
+                 ['developer', False, 'http://icy.co.za'],
+                 ['contact', False, 'http://icy.co.za']
+                ]
+
 
 
 ##########################################

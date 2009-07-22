@@ -42,7 +42,7 @@ Released   : 20090717
         <div id="menu">
             <ul>
             {{first=True}}
-            {{for _name, _link in response.menu:}}
+            {{for _name, _active, _link in response.menu:}}
             <li{{if first:}} class="first"{{pass}}><a href="{{=_link}}">{{=_name}}</a></li>
             {{first=False}}
             {{pass}}
